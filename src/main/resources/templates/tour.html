@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<form action="#" th:action="@{/query/submitQuery}"
+		th:object="${wrapper}" method="post">
+
+		<table class="table table-bordered table-hover table-striped"
+			border="1">
+			<thead>
+				<tr>
+					<th>Mã Tour</th>
+					<th>Tên Tour</th>
+					<th>Đặc Điểm</th>
+					<th>Loại Hình</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="currentTour, stat : ${wrapper.tourList}">
+					<td th:text="${currentTour.getMaTour()}"></td>
+					<td th:text="${currentTour.getTenTour()}"></td>
+					<td th:text="${currentTour.getDacDiem()}" style="white-space:pre-wrap; word-wrap:break-word"></td>
+					<td th:text="${currentTour.getMaLoaiHinh()}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<button type="submit" value="submit" class="btn btn-success">Submit</button>
+	</form>
+
+</body>
+</html>
