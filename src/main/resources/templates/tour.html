@@ -2,34 +2,136 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Welcome</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danh sách Tour</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/theme.css}" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.w3-sidebar {
+	z-index: 3;
+	width: 280px;
+	top: 43px;
+	bottom: 0;
+	height: inherit;
+}
+</style>
 </head>
 <body>
-	<form action="#" th:action="@{/query/submitQuery}"
-		th:object="${wrapper}" method="post">
+	<!-- Navbar -->
+	<div class="w3-top">
+		<div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+			<a
+				class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1"
+				href="javascript:void(0)" onclick="w3_open()"><i
+				class="fa fa-bars"></i></a> <a href="#"
+				class="w3-bar-item w3-button w3-theme-l1">Logo</a> <a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hover-white">Values</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>
+		</div>
+	</div>
 
-		<table class="table table-bordered table-hover table-striped"
-			border="1">
-			<thead>
-				<tr>
-					<th>Mã Tour</th>
-					<th>Tên Tour</th>
-					<th>Đặc Điểm</th>
-					<th>Loại Hình</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="currentTour, stat : ${wrapper.tourList}">
-					<td th:text="${currentTour.getMaTour()}"></td>
-					<td th:text="${currentTour.getTenTour()}"></td>
-					<td th:text="${currentTour.getDacDiem()}" style="white-space:pre-wrap; word-wrap:break-word"></td>
-					<td th:text="${currentTour.getMaLoaiHinh()}"></td>
-				</tr>
-			</tbody>
-		</table>
-		<button type="submit" value="submit" class="btn btn-success">Submit</button>
-	</form>
+	<!-- Sidebar -->
+	<nav
+		class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left"
+		id="mySidebar">
+		<a href="javascript:void(0)" onclick="w3_close()"
+			class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large"
+			title="Close Menu"> <i class="fa fa-remove"></i>
+		</a>
+		<h4 class="w3-bar-item">
+			<b>Danh sách chức năng</b>
+		</h4>
+		<a class="w3-bar-item w3-button w3-hover-black" href="/"> <img
+			th:src="@{/images/iconhome.png}" width="32" height="32"></img>&nbsp;Trang
+			chủ
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/tours"> <img
+			th:src="@{/images/icons8-plane-60.png}" width="32" height="32"></img>&nbsp;Quản
+			lý Tour
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#"> <img
+			th:src="@{/images/icons8-tour-guide-48.png}" width="32" height="32"></img>&nbsp;Quản
+			lý khách hàng
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#"> <img
+			th:src="@{/images/icons8-employee-64.png}" width="32" height="32"></img>&nbsp;Quản
+			lý nhân viên
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#">Thống kê
+			???</a>
+	</nav>
 
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large" onclick="w3_close()"
+		style="cursor: pointer" title="close side menu" id="myOverlay"></div>
+
+	<div class="w3-main" style="margin-left: 280px">
+		<div class="w3-row w3-padding-64 center-table">
+			<h1>Danh sách các Tour</h1>
+			<form action="#" th:action="@{/query/submitQuery}"
+				th:object="${wrapper}" method="post">
+
+				<table class="table table-bordered table-hover table-striped"
+					border="1">
+					<thead>
+						<tr>
+							<th>Mã Tour</th>
+							<th>Tên Tour</th>
+							<th>Đặc Điểm</th>
+							<th>Loại Hình</th>
+							<th>Xem chi tiết</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="currentTour, stat : ${wrapper.tourList}">
+							<td style="text-align: center;"
+								th:text="${currentTour.getMaTour()}"></td>
+							<td th:text="${currentTour.getTenTour()}"></td>
+							<td th:text="${currentTour.getDacDiem()}"
+								style="white-space: pre-wrap; word-wrap: break-word"></td>
+							<td th:text="${currentTour.getLoaiHinh()?.getTenLoaiHinh()}"></td>
+							<td style="text-align: center;"><a href="#"
+								style="color: blue;">Xem</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<!--  
+				<button type="submit" value="submit" class="btn btn-success">Submit</button>
+				-->
+			</form>
+		</div>
+	</div>
+
+	<script>
+		// Get the Sidebar
+		var mySidebar = document.getElementById("mySidebar");
+
+		// Get the DIV with overlay effect
+		var overlayBg = document.getElementById("myOverlay");
+
+		// Toggle between showing and hiding the sidebar, and add overlay effect
+		function w3_open() {
+			if (mySidebar.style.display === 'block') {
+				mySidebar.style.display = 'none';
+				overlayBg.style.display = "none";
+			} else {
+				mySidebar.style.display = 'block';
+				overlayBg.style.display = "block";
+			}
+		}
+
+		// Close the sidebar with the close button
+		function w3_close() {
+			mySidebar.style.display = "none";
+			overlayBg.style.display = "none";
+		}
+	</script>
 </body>
 </html>

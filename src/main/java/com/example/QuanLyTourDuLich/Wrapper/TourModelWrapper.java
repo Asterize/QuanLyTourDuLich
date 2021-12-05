@@ -7,10 +7,15 @@ import Model.TourModel;
 public class TourModelWrapper {
 	private ArrayList<TourModel> tourList;
 
-	   public ArrayList<TourModel> getTourList() {
-	      return tourList;
-	   }
-	   public void setTourList(ArrayList<TourModel> tours) {
-	      this.tourList = tours;
-	   }
+	public ArrayList<TourModel> getTourList() {
+		return tourList;
+	}
+
+	public void setTourList(ArrayList<TourModel> tours) {
+		this.tourList = new ArrayList<>();
+		for (TourModel tourModel : tours) {
+			if (tourModel.getTenTour() != null)
+				this.tourList.add(tourModel);
+		}
+	}
 }

@@ -25,16 +25,23 @@ public class TourController {
 		}
 	}
 
-	@RequestMapping("/")
-	String index(Model model) {
+	@RequestMapping("/tours")
+	public String tours(Model model) {
 		TourModelWrapper wrapper = new TourModelWrapper();
 		wrapper.setTourList(allTours);
 		model.addAttribute("wrapper", wrapper);
-
 		return "tour";
 	}
+	
+	@RequestMapping("/")
+	public String index() {
+//		TourModelWrapper wrapper = new TourModelWrapper();
+//		wrapper.setTourList(allTours);
+//		model.addAttribute("wrapper", wrapper);
+		return "index";
+	}
 
-	@RequestMapping(value = "/query/submitQuery", method = RequestMethod.POST)
+	@RequestMapping(value = "/tours/query/submitQuery", method = RequestMethod.POST)
 	public String processQuery(@ModelAttribute TourModelWrapper wrapper, Model model) {
 
 		System.out.println(wrapper.getTourList() != null ? wrapper.getTourList().size() : "null list");
