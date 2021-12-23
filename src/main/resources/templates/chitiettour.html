@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chi tiết tour</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/theme.css}" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.w3-sidebar {
+	z-index: 3;
+	width: 280px;
+	top: 43px;
+	bottom: 0;
+	height: inherit;
+}
+
+th, td {
+	padding: 8px;
+}
+
+.container {
+	display: grid;
+	grid-gap: 10px;
+	/*   height: 70vh; */
+	/*   grid-template-areas:  */
+	/*     "A A A A   A A A A   B B B B   B B B B" */
+	/*     "C C C C   C C C C   D D D D   D D D D" */
+	/*     "E E E E   E E E E   E E E E   E E E E"; */
+	grid-template-areas: "O O O O   O O O O" "A A A A   B B B B"
+		"C C C C   D D D D" "E E E E   E E E E";
+	/*   background-color: #2196F3; */
+	background: #06c60052;
+	padding: 10px;
+}
+
+.container>div {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 20px 10px;
+}
+
+.box-0 {
+	grid-area: O;
+}
+
+.box-1 {
+	grid-area: A;
+}
+
+.box-2 {
+	grid-area: B;
+}
+
+.box-3 {
+	grid-area: C;
+}
+
+.box-4 {
+	grid-area: D;
+}
+
+.box-5 {
+	grid-area: E;
+}
+</style>
+</head>
+<body>
+	<!-- Navbar -->
+	<div class="w3-top">
+		<div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+			<a
+				class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1"
+				href="javascript:void(0)" onclick="w3_open()"><i
+				class="fa fa-bars"></i></a> <a href="#"
+				class="w3-bar-item w3-button w3-theme-l1">Logo</a> <a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hover-white">Values</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
+			<a href="#"
+				class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<nav
+		class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left"
+		id="mySidebar">
+		<a href="javascript:void(0)" onclick="w3_close()"
+			class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large"
+			title="Close Menu"> <i class="fa fa-remove"></i>
+		</a>
+		<h4 class="w3-bar-item">
+			<b>Danh sách chức năng</b>
+		</h4>
+		<a class="w3-bar-item w3-button w3-hover-black" href="/"> <img
+			th:src="@{/images/iconhome.png}" width="32" height="32"></img>&nbsp;Trang
+			chủ
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/tours"> <img
+			th:src="@{/images/icons8-plane-60.png}" width="32" height="32"></img>&nbsp;Quản
+			lý Tour
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#"> <img
+			th:src="@{/images/icons8-tour-guide-48.png}" width="32" height="32"></img>&nbsp;Quản
+			lý đoàn
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/QL_NhanVien"> <img
+			th:src="@{/images/icons8-employee-64.png}" width="32" height="32"></img>&nbsp;Quản
+			lý nhân viên</a>
+<!-- 		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#"><img -->
+<!-- 			th:src="@{/images/chart-icon.png}" width="32" height="32"></img>&nbsp;Thống -->
+<!-- 			kê </a> -->
+	</nav>
+
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large" onclick="w3_close()"
+		style="cursor: pointer" title="close side menu" id="myOverlay"></div>
+
+	<div class="w3-main" style="margin-left: 280px">
+		<div class="w3-row w3-padding-64 center-table">
+			<div class="container">
+				<div class="box-0">
+					<h3>
+						Mã Tour: <span style="font-size: 1.4em">[[${tourHienTai.getMaTour()}]]</span>
+					</h3>
+				</div>
+				<div class="box-1">
+					<h3>
+						Tên Tour hiện tại: <span style="font-size: 1.4em"
+							id="tenTourHienTai">[[${tourHienTai.getTenTour()}]]</span>
+					</h3>
+					<form action="/changeTourName" method="post">
+						<label for="newTourName">Tên Tour mới:</label><br> <input
+							type="text" id="tenTourMoi" name="newTourName"
+							th:value="${tourHienTai.getTenTour()}"> &nbsp;&nbsp; <input
+							type="hidden" th:value="${tourHienTai.getMaTour()}"
+							th:attr="name='maTour'" /> <input type="submit" value="Sửa mới"
+							onclick="doiTenTour()">
+					</form>
+				</div>
+
+				<div class="box-2">
+					<h3>
+						Loại hình hiện tại: <span style="font-size: 1.4em"
+							id="loaiHinhHienTai"
+							th:text="${tourHienTai.getLoaiHinh()?.getTenLoaiHinh()}"></span>
+					</h3>
+					<form action="/changeLoaiHinh" method="post">
+						<label for="newloaihinh">Loại hình:</label> <select
+							name="newloaihinh" id="loaihinh">
+							<option th:each="lh , stat : ${wrapperLH.getLoaiHinhList()}"
+								th:value="${lh.getTenLoaiHinh()}"
+								th:text="${lh.getTenLoaiHinh()}"></option>
+						</select> &nbsp;&nbsp; <input type="hidden"
+							th:value="${tourHienTai.getMaTour()}" th:attr="name='maTour'" />
+						<input type="hidden" th:value="${tourHienTai.getMaLoaiHinh()}"
+							th:attr="name='maLH'" /> <input type="submit" value="Sửa mới">
+					</form>
+				</div>
+
+				<div class="box-3">
+					<h3>Giá Tour (theo thời gian)</h3>
+					<form action="#" th:action="@{/query/submitQuery}"
+						th:object="${wrapperGia}" method="post">
+
+						<table class="table table-bordered table-hover table-striped"
+							border="1">
+							<thead>
+								<tr>
+									<th>Thời gian bắt đầu</th>
+									<th>Thời gian kết thúc</th>
+									<th>Giá</th>
+									<!-- 							<th>Xem chi tiết</th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="gia, stat : ${wrapperGia.getGiaTourList()}">
+									<td style="text-align: center;"><th:block
+											th:text="${wrapperGia.formatNgayVietNam(gia.getThoiGianBD())}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${wrapperGia.formatNgayVietNam(gia.getThoiGianKT())}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${wrapperGia.formatGiaVietNam(gia.getGiaTien())}" /></td>
+									<!-- 							<td style="text-align: center;"><a th:href="@{/tours/{id}(id=${currentTour.getMaTour()})}" -->
+									<!-- 								style="color: blue;">Xem</a></td> -->
+								</tr>
+							</tbody>
+						</table>
+						<!--  
+					<button type="submit" value="submit" class="btn btn-success">Submit</button>
+					-->
+					</form>
+
+				</div>
+				<div class="box-4">
+					<h3>Lịch trình (Địa điểm - Thứ tự):</h3>
+					<form action="#" th:action="@{/query/submitQuery}"
+						th:object="${wrapperThamQuan}" method="post">
+
+						<table class="table table-bordered table-hover table-striped"
+							border="1">
+							<thead>
+								<tr>
+									<th>Thứ tự</th>
+									<th>Địa điểm</th>
+									<th>Xóa</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									th:each="thamquan, stat : ${wrapperThamQuan.getThamQuanList()}">
+									<td style="text-align: center;"><th:block
+											th:text="${thamquan.getThutu()}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${thamquan.getTenDiaDiem()}" /></td>
+									<td style="text-align: center;"><a
+										th:href="@{/deleteDiaDiem/{idTour}/{stt}(idTour=${tourHienTai.getMaTour()}, stt=${thamquan.getThutu()})}"
+										style="color: blue;">Xóa</a></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</form>
+					<br>
+					<form action="/themDiaDiem" method="post">
+						<label for="newDiaDiem">Địa điểm:</label> <select
+							name="newDiaDiem" id="diadiem">
+							<option th:each="dd , stat : ${wrapperDiaDiem.getDiaDiemList()}"
+								th:value="${dd.getTenDiaDiem()}" th:text="${dd.getTenDiaDiem()}">
+							</option>
+						</select> &nbsp;&nbsp; <input type="hidden"
+							th:value="${tourHienTai.getMaTour()}" th:attr="name='maTour'" />
+						<input type="submit" value="Thêm địa điểm mới">
+					</form>
+				</div>
+				<div class="box-5">
+					<h3>Đặc điểm Tour:</h3>
+					<div
+						style="background-color: #9FECBA; width: 100%; border-radius: 1em;; padding: 1em;">
+						<p th:text="${tourHienTai.getDacDiem()}"
+							style="white-space: pre-wrap; word-wrap: break-word; font-size: 125%"></p>
+					</div>
+					<br>
+					<form action="/changeDacDiem" method="post">
+						<label for="newDacDiem">Đặc điểm mới:</label> <br>
+						<textarea rows="6" cols="120" id="dacDiemMoi" name="newDacDiem"
+							th:value="${tourHienTai.getDacDiem()}"></textarea>
+						&nbsp;&nbsp; <input type="hidden"
+							th:value="${tourHienTai.getMaTour()}" th:attr="name='maTour'" />
+						<br>
+						<br> <input type="submit" value="Sửa đặc điểm mới">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Get the Sidebar
+		var mySidebar = document.getElementById("mySidebar");
+
+		// Get the DIV with overlay effect
+		var overlayBg = document.getElementById("myOverlay");
+
+		// Toggle between showing and hiding the sidebar, and add overlay effect
+		function w3_open() {
+			if (mySidebar.style.display === 'block') {
+				mySidebar.style.display = 'none';
+				overlayBg.style.display = "none";
+			} else {
+				mySidebar.style.display = 'block';
+				overlayBg.style.display = "block";
+			}
+		}
+
+		// Close the sidebar with the close button
+		function w3_close() {
+			mySidebar.style.display = "none";
+			overlayBg.style.display = "none";
+		}
+
+		function doiTenTour() {
+			let newName = document.getElementById("tenTourMoi").innerHTML;
+			document.getElementById("tenTourHienTai").innerHTML = newName;
+		}
+	</script>
+</body>
+</html>

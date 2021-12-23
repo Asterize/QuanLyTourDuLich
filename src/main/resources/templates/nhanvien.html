@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quản lý Tour</title>
+<title>Quản lý nhân viên</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/theme.css}" />
 <link rel="stylesheet"
@@ -19,6 +19,50 @@
 
 th, td {
 	padding: 8px;
+}
+
+.container {
+	display: grid;
+	grid-gap: 10px;
+	/*   height: 70vh; */
+	/*   grid-template-areas:  */
+	/*     "A A A A   A A A A   B B B B   B B B B" */
+	/*     "C C C C   C C C C   D D D D   D D D D" */
+	/*     "E E E E   E E E E   E E E E   E E E E"; */
+	grid-template-areas: "O O O O   O O O O" "A A A A   B B B B"
+		"C C C C   D D D D" "E E E E   E E E E";
+	/*   background-color: #2196F3; */
+	background: #06c60052;
+	padding: 10px;
+}
+
+.container>div {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 20px 10px;
+}
+
+.box-0 {
+	grid-area: O;
+}
+
+.box-1 {
+	grid-area: A;
+}
+
+.box-2 {
+	grid-area: B;
+}
+
+.box-3 {
+	grid-area: C;
+}
+
+.box-4 {
+	grid-area: D;
+}
+
+.box-5 {
+	grid-area: E;
 }
 </style>
 </head>
@@ -65,9 +109,9 @@ th, td {
 		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#"> <img
 			th:src="@{/images/icons8-tour-guide-48.png}" width="32" height="32"></img>&nbsp;Quản
 			lý đoàn
-		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/QL_NhanVien">
-			<img th:src="@{/images/icons8-employee-64.png}" width="32"
-			height="32"></img>&nbsp;Quản lý nhân viên</a>
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/QL_NhanVien"> <img
+			th:src="@{/images/icons8-employee-64.png}" width="32" height="32"></img>&nbsp;Quản
+			lý nhân viên</a>
 <!-- 		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#"><img -->
 <!-- 			th:src="@{/images/chart-icon.png}" width="32" height="32"></img>&nbsp;Thống -->
 <!-- 			kê </a> -->
@@ -79,42 +123,56 @@ th, td {
 
 	<div class="w3-main" style="margin-left: 280px">
 		<div class="w3-row w3-padding-64 center-table">
-			<h1>Danh sách các Tour</h1>
-			<form action="#" th:action="@{/query/submitQuery}"
-				th:object="${wrapper}" method="post">
+		<h1>Quản lý nhân viên &nbsp;&nbsp;&nbsp;<span><a style="font-size: 1.3rem;" th:href="@{/QL_NhanVien/AddNhanVien}"><button>Thêm nhân viên mới</button></a></span></h1>
+		 <br>
+			<div class="container">
+				<div class="box-0">
+					<form action="#" th:action="@{/query/submitQuery}"
+						th:object="${wrapperNV}" method="post">
 
-				<table class="table table-bordered table-hover table-striped"
-					border="1">
-					<thead>
-						<tr>
-							<!-- 							<th>Mã Tour</th> -->
-							<th>STT</th>
-							<th>Tên Tour</th>
-							<th>Đặc Điểm</th>
-							<th>Loại Hình</th>
-							<th>Xem chi tiết</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="currentTour, stat : ${wrapper.tourList}">
-							<!-- 							<td style="text-align: center;" -->
-							<!-- 								th:text="${currentTour.getMaTour()}"></td> -->
-							<td style="text-align: center;"
-								th:text='${wrapper.getSTT(currentTour.getMaTour())}'></td>
-							<td th:text="${currentTour.getTenTour()}"></td>
-							<td th:text="${currentTour.getDacDiem()}"
-								style="white-space: pre-wrap; word-wrap: break-word"></td>
-							<td th:text="${currentTour.getLoaiHinh()?.getTenLoaiHinh()}"></td>
-							<td style="text-align: center;"><a
-								th:href="@{/tours/{id}(id=${currentTour.getMaTour()})}"
-								style="color: blue;">Xem</a></td>
-						</tr>
-					</tbody>
-				</table>
-				<!--  
-				<button type="submit" value="submit" class="btn btn-success">Submit</button>
-				-->
-			</form>
+						<table class="table table-bordered table-hover table-striped"
+							border="1">
+							<thead>
+								<tr>
+									<th>Tên Nhân Viên</th>
+									<th>Ngày Sinh</th>
+									<th>Giới Tính</th>
+									<th>Số ĐT</th>
+									<th>Địa Chỉ</th>
+									<th>Trạng Thái</th>
+									<th>Lương</th>
+									<th>Sửa</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="nv, stat : ${wrapperNV.getNhanVienList()}">
+									<td style="text-align: center;"><th:block
+											th:text="${nv.getTenNhanVien()}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${wrapperNV.formatNgaySinh(nv.getNgaySinh())}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${nv.getGioiTinh()}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${nv.getSDT()}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${nv.getDiaChi()}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${nv.getTrangThai()}" /></td>
+									<td style="text-align: center;"><th:block
+											th:text="${wrapperNV.formatLuongVND(nv.getLuong())}" /></td>
+									<td style="text-align: center;"><a
+										th:href="@{/QL_NhanVien/{id}(id=${nv.getMaNhanVien()})}"
+										style="color: blue;">Sửa</a></td>
+								</tr>
+							</tbody>
+						</table>
+						<!--  
+					<button type="submit" value="submit" class="btn btn-success">Submit</button>
+					-->
+					</form>
+				</div>
+
+			</div>
 		</div>
 	</div>
 
@@ -140,6 +198,11 @@ th, td {
 		function w3_close() {
 			mySidebar.style.display = "none";
 			overlayBg.style.display = "none";
+		}
+
+		function doiTenTour() {
+			let newName = document.getElementById("tenTourMoi").innerHTML;
+			document.getElementById("tenTourHienTai").innerHTML = newName;
 		}
 	</script>
 </body>

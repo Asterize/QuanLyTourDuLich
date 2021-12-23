@@ -1,7 +1,6 @@
 package com.example.QuanLyTourDuLich.Wrapper;
 
 import java.util.ArrayList;
-
 import Model.TourModel;
 
 public class TourModelWrapper {
@@ -18,4 +17,15 @@ public class TourModelWrapper {
 				this.tourList.add(tourModel);
 		}
 	}
+
+	public String getSTT(String maTour) {
+		String stt = "";
+		int length = maTour.length();
+		if (length > 1) {
+			stt = maTour.substring(1);
+		}
+
+		return stt;
+	}
+
 }
