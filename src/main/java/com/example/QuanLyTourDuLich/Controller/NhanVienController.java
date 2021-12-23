@@ -3,32 +3,20 @@ package com.example.QuanLyTourDuLich.Controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
-
-import com.example.QuanLyTourDuLich.Wrapper.DiaDiemModelWrapper;
-import com.example.QuanLyTourDuLich.Wrapper.GiaTourModelWrapper;
-import com.example.QuanLyTourDuLich.Wrapper.LoaiHinhModelWrapper;
 import com.example.QuanLyTourDuLich.Wrapper.NhanVienModelWrapper;
-import com.example.QuanLyTourDuLich.Wrapper.ThamQuanModelWrapper;
-
-import DAL.DiaDiemDAL;
 import DAL.NhanVienDAL;
-import DAL.TourDAL;
-import Model.LoaiHinhModel;
 import Model.NhanVienModel;
-import Model.TourModel;
 
 @Controller
 public class NhanVienController {
 	ArrayList<NhanVienModel> allNhanViens = new ArrayList<>();
 //    ArrayList<NhanVienModel> listNhanVienTemp = new ArrayList<>();  // dùng cho việc lưu kết quả tìm kiếm nhân viên
-	private NhanVienModel nhanVien = new NhanVienModel();
 	private NhanVienModel nhanVienHienTai = new NhanVienModel();
 
 	public NhanVienController() {

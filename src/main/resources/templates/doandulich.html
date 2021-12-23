@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quản lý Tour</title>
+<title>Quản lý Đoàn du lịch</title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/theme.css}" />
 <link rel="stylesheet"
@@ -81,32 +81,42 @@ th, td {
 		<div class="w3-row w3-padding-64 center-table">
 			<h1>Danh sách các Tour</h1>
 			<form action="#" th:action="@{/query/submitQuery}"
-				th:object="${wrapper}" method="post">
+				th:object="${wrapperDoan}" method="post">
 
 				<table class="table table-bordered table-hover table-striped"
 					border="1">
 					<thead>
 						<tr>
 							<!-- 							<th>Mã Tour</th> -->
-							<th>STT</th>
-							<th>Tên Tour</th>
-							<th>Đặc Điểm</th>
-							<th>Loại Hình</th>
-							<th>Xem chi tiết</th>
+							<th>Mã Đoàn</th>
+							<th>Mã Tour</th>
+							<th>Ngày Khởi Hành</th>
+							<th>Ngày Kết Thúc</th>
+							<th>Doanh Thu</th>
+							<th>Hành Trình</th>
+							<th>Khách Sạn</th>
+							<th>Xem danh sách khách hàng</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="currentTour, stat : ${wrapper.tourList}">
-							<!-- 							<td style="text-align: center;" -->
-							<!-- 								th:text="${currentTour.getMaTour()}"></td> -->
+						<tr th:each="doan, stat : ${wrapperDoan.getDoanDuLichList()}">
+							
 							<td style="text-align: center;"
-								th:text='${wrapper.getSTT(currentTour.getMaTour())}'></td>
-							<td th:text="${currentTour.getTenTour()}"></td>
-							<td th:text="${currentTour.getDacDiem()}"
-								style="white-space: pre-wrap; word-wrap: break-word"></td>
-							<td th:text="${currentTour.getLoaiHinh()?.getTenLoaiHinh()}"></td>
+								th:text='${doan.getMaDoan()}'></td>
+							<td style="text-align: center;"
+								th:text='${doan.getMaTour()}'></td>
+							<td style="text-align: center;"
+								th:text='${doan.getNgayKhoiHanh()}'></td>
+							<td style="text-align: center;"
+								th:text='${doan.getNgayKetThuc()}'></td>
+							<td style="text-align: center;"
+								th:text='${wrapperDoan.formatDoanhThu(doan.getDoanhThu())}'></td>
+							<td style="text-align: center; white-space: pre-wrap; word-wrap: break-word"
+								th:text='${doan.getHanhTrinh()}'></td>
+							<td style="text-align: center;"
+								th:text='${doan.getKhachSan()}'></td>
 							<td style="text-align: center;"><a
-								th:href="@{/tours/{id}(id=${currentTour.getMaTour()})}"
+								th:href="@{/DoanDuLich/{id}(id=${doan.getMaDoan()})}"
 								style="color: blue;">Xem</a></td>
 						</tr>
 					</tbody>
