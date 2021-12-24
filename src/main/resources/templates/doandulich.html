@@ -79,7 +79,7 @@ th, td {
 
 	<div class="w3-main" style="margin-left: 280px">
 		<div class="w3-row w3-padding-64 center-table">
-			<h1>Danh sách các Tour</h1>
+			<h1>Danh sách các Đoàn</h1>
 			<form action="#" th:action="@{/query/submitQuery}"
 				th:object="${wrapperDoan}" method="post">
 
@@ -87,7 +87,6 @@ th, td {
 					border="1">
 					<thead>
 						<tr>
-							<!-- 							<th>Mã Tour</th> -->
 							<th>Mã Đoàn</th>
 							<th>Mã Tour</th>
 							<th>Ngày Khởi Hành</th>
@@ -96,6 +95,8 @@ th, td {
 							<th>Hành Trình</th>
 							<th>Khách Sạn</th>
 							<th>Xem danh sách khách hàng</th>
+							<th>Xem nhân viên được phân công</th>
+							<th>Xem chi phí</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -116,7 +117,13 @@ th, td {
 							<td style="text-align: center;"
 								th:text='${doan.getKhachSan()}'></td>
 							<td style="text-align: center;"><a
-								th:href="@{/DoanDuLich/{id}(id=${doan.getMaDoan()})}"
+								th:href="@{/DoanDuLich/{id}/{tour}(id=${doan.getMaDoan()}, tour=${doan.getMaTour()})}"
+								style="color: blue;">Xem</a></td>
+							<td style="text-align: center;"><a
+								th:href="@{/DoanDuLich/{id}/{tour}/PhanCong(id=${doan.getMaDoan()}, tour=${doan.getMaTour()})}"
+								style="color: blue;">Xem</a></td>
+							<td style="text-align: center;"><a
+								th:href="@{/DoanDuLich/{id}/{tour}/ChiPhi(id=${doan.getMaDoan()}, tour=${doan.getMaTour()})}"
 								style="color: blue;">Xem</a></td>
 						</tr>
 					</tbody>

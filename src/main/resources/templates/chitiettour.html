@@ -106,15 +106,16 @@ th, td {
 		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/tours"> <img
 			th:src="@{/images/icons8-plane-60.png}" width="32" height="32"></img>&nbsp;Quản
 			lý Tour
-		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/DoanDuLich"> <img
-			th:src="@{/images/icons8-tour-guide-48.png}" width="32" height="32"></img>&nbsp;Quản
-			lý đoàn
-		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/QL_NhanVien"> <img
-			th:src="@{/images/icons8-employee-64.png}" width="32" height="32"></img>&nbsp;Quản
-			lý nhân viên</a>
-<!-- 		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#"><img -->
-<!-- 			th:src="@{/images/chart-icon.png}" width="32" height="32"></img>&nbsp;Thống -->
-<!-- 			kê </a> -->
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/DoanDuLich">
+			<img th:src="@{/images/icons8-tour-guide-48.png}" width="32"
+			height="32"></img>&nbsp;Quản lý đoàn
+		</a> <a class="w3-bar-item w3-button w3-hover-black" href="/QL_NhanVien">
+			<img th:src="@{/images/icons8-employee-64.png}" width="32"
+			height="32"></img>&nbsp;Quản lý nhân viên
+		</a>
+		<!-- 		</a> <a class="w3-bar-item w3-button w3-hover-black" href="#"><img -->
+		<!-- 			th:src="@{/images/chart-icon.png}" width="32" height="32"></img>&nbsp;Thống -->
+		<!-- 			kê </a> -->
 	</nav>
 
 	<!-- Overlay effect when opening sidebar on small screens -->
@@ -252,8 +253,7 @@ th, td {
 							th:value="${tourHienTai.getDacDiem()}"></textarea>
 						&nbsp;&nbsp; <input type="hidden"
 							th:value="${tourHienTai.getMaTour()}" th:attr="name='maTour'" />
-						<br>
-						<br> <input type="submit" value="Sửa đặc điểm mới">
+						<br> <br> <input type="submit" value="Sửa đặc điểm mới">
 					</form>
 				</div>
 			</div>
