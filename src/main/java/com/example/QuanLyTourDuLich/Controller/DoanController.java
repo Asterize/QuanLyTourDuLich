@@ -1,23 +1,18 @@
 package com.example.QuanLyTourDuLich.Controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
-
 import com.example.QuanLyTourDuLich.Wrapper.ChiPhiModelWrapper;
-import com.example.QuanLyTourDuLich.Wrapper.ChiTietDoanModelWrapper;
 import com.example.QuanLyTourDuLich.Wrapper.DoanDuLichModelWrapper;
 import com.example.QuanLyTourDuLich.Wrapper.KhachHangModelWrapper;
 import com.example.QuanLyTourDuLich.Wrapper.LoaiChiPhiModelWrapper;
 import com.example.QuanLyTourDuLich.Wrapper.NhanVienModelWrapper;
 import com.example.QuanLyTourDuLich.Wrapper.PhanBoNVDoanModelWrapper;
-
 import DAL.ChiPhiDAL;
 import DAL.ChiTietDoanDAL;
 import DAL.PhanBoNVDoanDAL;
@@ -353,7 +348,7 @@ public class DoanController {
 	public RedirectView Doan_ChiPhi_Delete(Model model, @PathVariable("id") String maDoan,
 			@PathVariable("tour") String maTour, @PathVariable("maCP") String maCP) {
 		try {
-			ArrayList<ChiPhiModel> chiPhiByMaDoan = chiPhi.getChiPhiByMaDoan(maDoan);
+//			ArrayList<ChiPhiModel> chiPhiByMaDoan = chiPhi.getChiPhiByMaDoan(maDoan);
 			ChiPhiDAL dal = new ChiPhiDAL();
 			dal.delete(maCP);
 			listCP.clear();
